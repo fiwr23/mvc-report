@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="{{ asset('img/glider.svg') }}">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="site-header" style="background-image: url({{ asset('img/forestheader.jpg') }})">
+            <span class="site-title">My Symfony Site</span>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{{ path('index') }}">Home</a></li>
+                <li><a href="{{ path('about') }}">About</a></li>
+                <li><a href="{{ path('report') }}">Report</a></li>
+                <li><a href="{{ path('api') }}">API</a></li>
+                <li><a href="{{ path('lucky') }}">Lucky</a></li>
+            </ul>
+        </nav>
+        <main>
+        {% block body %}{% endblock %}
+        </main>
+        <footer>
+            <p>Relevant information</p>
+        </footer>
+    </body>
+</html>

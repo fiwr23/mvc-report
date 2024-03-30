@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}API{% endblock %}
+
+{% block body %}
+    <nav>
+        <ul>
+            <li><a href="/api/quote">Quote</a></li>
+        </ul>
+    </nav>
+    <h1>API</h1>
+    <p>Välj API ovan.</p>
+    <a href="{{ asset('img/glider.svg') }}">
+        <img src="{{ asset('img/symfony-php-framework.jpg') }}" alt="">
+    </a>
+{% endblock %}
