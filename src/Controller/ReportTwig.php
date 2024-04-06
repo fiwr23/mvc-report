@@ -10,7 +10,7 @@ class ReportTwig extends AbstractController
 {
     #[Route("/lucky", name: "lucky")]
     public function number(): Response
-    {   
+    {
 
         $images = array("img/number1.jpg", "img/number2.jpg", "img/number3.jpg", "img/number4.jpg"
 
@@ -19,7 +19,7 @@ class ReportTwig extends AbstractController
 
         $data = [
             'number' => $number,
-            'rand_image' => $images[$number-1]
+            'rand_image' => $images[$number - 1]
         ];
 
         return $this->render('lucky.html.twig', $data);
