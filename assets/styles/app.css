@@ -1,13 +1,11 @@
 body {
-    background-color: skyblue;
+    background-color: rgb(161, 234, 154);
     margin: 0 auto;
     max-width: 700px;
-    background: url('../images/background.jpg');
-    background-size: cover;
 }
 
 h1 {
-    border-bottom: 4px double #ccc;
+    border-bottom: 4px double #464444;
 }
 
 header {
@@ -67,7 +65,7 @@ p {
 
 .column {
     flex: 50%;
-    border: 4px double #ccc;
+    border: 4px double #464444;
 }
 
 footer {
