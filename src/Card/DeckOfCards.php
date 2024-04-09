@@ -59,13 +59,13 @@ class DeckOfCards
         $clubs = array_map("self::combineCards", $this->clubsGraphic, $this->clubsText);
 
         $allCards = array_merge($spades, $hearts, $diamonds, $clubs);
-        $diceArray = [];
+        $cardArray = [];
         foreach ($allCards as $x) {
 
-            array_push($diceArray, new CardGraphic($x[1], $x[0]));
+            array_push($cardArray, new CardGraphic($x[1], $x[0]));
         }
         // return $allCards;
-        return $diceArray;
+        return $cardArray;
     }
 
     public function getAllCardsShuffled(): array
