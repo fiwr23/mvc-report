@@ -9,8 +9,36 @@
         </ul>
     </nav>
     <h1>API</h1>
-    <p>Välj API ovan.</p>
+    <a href="./api/quote"><span style=" font-size: 24px; color: black;">Quote</span></a><br>
+    <a href="./api/deck"><span style=" font-size: 24px;" color: black;">Show deck in order</span></a><br>
+    <h3>Show shuffled deck via POST</h3>
+    <form name="form_shuffle_json"method= "POST" action="{{ path('shuffle_json_post') }}">
+    <input type="submit" value="Show Shuffled Deck" />
+    </form>
+
+    <h3>Draw one card via POST</h3>
+    <form name = "form_draw_one_json" method = "POST" action = "{{ path('draw_one_json_post') }}">
+    <input type= "submit" value="Draw One Card" />
+    </form>
+
+    <h3>Draw many cards via POST</h3>
+    <form name = "form_draw_many_json_post" id = "form_draw_many_json_post" 
+        method="POST" action="{{ path('draw_many_num_json_post', {num: 1 }) }}">
+        <input type="number" id = "numCardsToDraw" name = "numCardsToDraw" min="1" max="56" value="1"
+            oninput = "myFunction()"
+        >
+        <input type="submit" name="do_it" value="Draw Cards"
+        >
+    </form>
     <a href="{{ asset('img/glider.svg') }}">
         <img src="{{ asset('img/symfony-php-framework.jpg') }}" alt="">
     </a>
+    <script>
+        function myFunction(){
+        console.log("myFunc");
+        let curr_value = document.getElementById('numCardsToDraw').value;
+        document.getElementById('form_draw_many_json_post').action =`./api/deck/draw/${curr_value}`;
+        }
+    </script>
+}
 {% endblock %}
