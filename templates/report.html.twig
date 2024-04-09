@@ -41,7 +41,27 @@
     </div>
     <div id="kmom02" class="kmom">
     <h2>kmom02</h2>
-    <p>Text</p>
+    <p>
+        Här följer först förklaringarna för de objektorienterade konstruktionerna:<br>
+        Arv är när en klass ärver public eller protected metoder och variabler från förädraklassen.
+         Komposition konstruktionen är när en klass skapas/är del av en annan. 
+         Ett slags kontrakt gällande vilka publika metoder som måste finnas i en klass kallas interface.
+          Trait är lite ungefär som kod med metoder som går att klistra in i andra klasser. 
+          Bra då en klass kan bara ärva från en annan klass.<br>
+        Min implementation flöt på hyfsat bra. Först skrev jag klasserna för Card och CardGraphic. 
+        Då de bara lagrar/returnerar text och grafik värden gav de mig inga problem.
+         Sedan skrev jag DeckOfCards klassen där korten skapas. Det blev en del arbete då ett antal arrays krävdes 
+         för kortens värden och sort.
+        Dessa mergas och används vid skapandet av CardGraphic korten till kortleken som  kontrollerna 
+        använder sig av till länkarna och sparandet i sessionen.<br>  
+        Förbättringspotential finns säkert men jag kan inte komma på vad just nu. 
+        Mina reflektioner så här långt med att jobba i Symfony och MVC är att jag ser potentialen. 
+        När man väl förstår hur allt fungerar och det "klickar" kommer kodandet säkert få en rejäl boost. 
+        Ännu känns allt lite omständigt men det blir säkert bättre framöver.<br>
+        Mitt TIL är att två använda Traits i en klass inte kan ha metoder med samma namn då det 
+        ger ett fatal error. Då måste man använda 'insteadof' eller 'as' operatörerna.<br>
+            
+    </p>
     </div>
     <div id="kmom03" class="kmom">
     <h2>kmom03</h2>
