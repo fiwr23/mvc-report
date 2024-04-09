@@ -9,8 +9,16 @@
     <a href="{{ path('show_deck') }}">Show deck of cards in order</a><br>
     <a href="{{ path('shuffled_deck') }}">Show deck of cards shuffled</a><br>
     <a href="{{ path('draw_one_card') }}">Draw one card from shuffled deck</a><br>
-    <a href="{{ path('draw_many_cards', { "num": 0 }) }}">Draw many cards from shuffled deck</a>
+    <a href="{{ path('draw_many_cards', { "num": 0 }) }}">Draw many cards from shuffled deck</a><br>
+    <a href="{{ path('api') }}">The JSON API for card game</a>
 </p>
+<p>
+<h2>Class structure</h2>
+Card -> Holds the card's text value and returns it on demand.<br>
+CardGraphic -> Holds the card's graphic value and returns it on demand. Extends Card.<br>
+DeckofCards -> Makes the deck of cards on demand. Uses CardGraphic as komposition.<br>
+</p>
+<img src="{{ asset('img/mvckmom02uml.jpeg') }}" alt="">
 
 
 {% endblock %}
