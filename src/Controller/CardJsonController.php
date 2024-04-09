@@ -92,7 +92,7 @@ class CardJsonController
 
             $data = [
                 "cardsLeft" => count($shuffledDeck),
-                "deckOfCards" => $cardsToSend
+                "cards" => $cardsToSend
             ];
 
         }
@@ -139,7 +139,7 @@ class CardJsonController
 
             $data = [
                 "cardsLeft" => count($shuffledDeck),
-                "deckOfCards" => $cardsToSend
+                "cards" => $cardsToSend
             ];
 
         }
