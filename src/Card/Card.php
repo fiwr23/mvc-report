@@ -11,6 +11,7 @@ class Card
         $this->textValue = $textIn;
     }
 
+    /*
     public function roll(): int
     {
         $this->value = random_int(1, 6);
@@ -21,7 +22,7 @@ class Card
     {
         return $this->textValue;
     }
-
+    */
     public function getAsString(): string
     {
         return "{$this->textValue}";
