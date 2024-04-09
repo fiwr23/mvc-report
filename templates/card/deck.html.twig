@@ -1,0 +1,12 @@
+{% extends "base_card.html.twig" %}
+
+{% block title %}The Deck{% endblock %}
+
+{% block main %}
+<h1>The Deck {{ whatWay }}</h1>
+
+<p>{% for value in deckOfCards %}
+    <span class="die">{{ value.getAsString() }}</span>
+{% endfor %}</p>
+
+{% endblock %}

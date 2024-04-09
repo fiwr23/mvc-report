@@ -1,0 +1,18 @@
+{% extends "base_card.html.twig" %}
+
+{% block title %}The Deck{% endblock %}
+
+{% block main %}
+{{ include('flash.html.twig') }}
+<h1>{{ howMany }} drawn cards.</h1>
+<h2>{{ cardsLeft }} cards left in deck.</h2>
+
+{%if deckOfCards | length > 0 %}
+<p>{% for value in deckOfCards %}
+    <span class="die">{{ value.getAsString() }}</span>
+{% endfor %}</p>
+{% endif %}
+<form action="">
+    <input type="submit" value="Draw Card" />
+</form>
+{% endblock %}
