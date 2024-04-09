@@ -1,0 +1,13 @@
+{% extends "base_pig.html.twig" %}
+
+{% block title %}Current Session{% endblock %}
+
+{% block main %}
+{{ include('flash.html.twig') }}
+
+<h1>Current Session</h1>
+<p>
+{{ dump(app.session.all()) }}
+<a href="{{ path('clear_session') }}">Delete session</a>
+</p>
+{% endblock %}
