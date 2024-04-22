@@ -1,0 +1,25 @@
+{% extends "base_card.html.twig" %}
+
+{% block title %}21 the card game{% endblock %}
+
+{% block main %}
+<h1>21 - The card game</h1>
+
+<p>Det här är hemsidan för kortspelet 21.<br>
+    <a href="{{ path('play_game') }}">Spela spelet 21</a><br>
+    <a href="{{ path('game_doc') }}">Dokumentation</a><br>
+    <a href="{{ path('api') }}">API för spelets JSON</a><br>
+    <h2>Regler för kortspelet 21</h2> 
+     52 kort i kortleken. Äss har valfritt värdet 1 eller 14, övriga kort har sina vanliga värden. 
+     Spelaren drar ett kort. Spelaren drar sedan kort tills han är nöjd/vinner/förlorar. 
+     Vinner direkt gör spelaren om kortens värde är 21. Har han fått mer än 21 så så vinner banken. 
+     Har han fått mindre än 21 kan han anse sig nöjd med vad han fått eller begära in fler kort. 
+     Om spelaren anser sig nöjd skall banken spela mot honom. Banken vet ej vad spelaren fick. 
+     Banken tar då upp kort ett efter ett och lägger dem med framsidan upp på bordet. 
+     Blir resultatet 21 vinner banken. Blir resultatet över 21 förlorar banken och spelaren vinner. 
+     Stannar banken på ett resultat under 21 jämförs bankens hand med spelarens. 
+     Den hand som är högst vinner.<br><br>
+
+</p>
+
+{% endblock %}
