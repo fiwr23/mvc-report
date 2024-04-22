@@ -61,6 +61,7 @@ p {
 
 .row {
     display: flex;
+    width: 700px;
 }
 
 .column {
@@ -102,6 +103,7 @@ form {
     color: #004085;
     background-color: #cce5ff;
     border-color: #b8daff;
+    font-size: 24px;
 }
 .flash-notice:before {
     content: "ⓘ";
@@ -112,7 +114,19 @@ form {
     color: #856404;
     background-color: #fff3cd;
     border-color: #ffeeba;
+    font-size: 24px;
 }
 .flash-warning:before {
     content: "⚠";
+}
+
+.form21 {
+    display: inline-block;
+    margin: 2px
+}
+
+button {
+    margin: 20px;
+    margin-left: 50px;
+    margin-top: 5px
 }
