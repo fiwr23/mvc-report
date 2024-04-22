@@ -6,6 +6,8 @@ use App\Dice\Dice;
 use App\Dice\DiceGraphic;
 use App\Dice\DiceHand;
 
+use Exception;
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -38,7 +40,7 @@ class DiceGameController extends AbstractController
     public function testRollDices(int $num): Response
     {
         if ($num > 99) {
-            throw new \Exception("Can not roll more than 99 dices!");
+            throw new Exception("Can not roll more than 99 dices!");
         }
 
         $diceRoll = [];
@@ -61,15 +63,17 @@ class DiceGameController extends AbstractController
     public function testDiceHand(int $num): Response
     {
         if ($num > 99) {
-            throw new \Exception("Can not roll more than 99 dices!");
+            throw new Exception("Can not roll more than 99 dices!");
         }
 
         $hand = new DiceHand();
         for ($i = 1; $i <= $num; $i++) {
-            if ($i % 2 === 1) {
-                $hand->add(new DiceGraphic());
-            } else {
-                $hand->add(new Dice());
+            switch ($i % 2 === 1) {
+                case true:
+                    $hand->add(new DiceGraphic());
+                    break;
+                default:
+                    $hand->add(new Dice());
             }
         }
 
@@ -136,6 +140,7 @@ class DiceGameController extends AbstractController
     ): Response {
         $dicehand = $session->get("pig_dicehand");
 
+        /** @var DiceHand $dicehand*/
         $data = [
             "pigDices" => $session->get("pig_dices"),
             "pigRound" => $session->get("pig_round"),
@@ -160,10 +165,12 @@ class DiceGameController extends AbstractController
         SessionInterface $session
     ): Response {
         $hand = $session->get("pig_dicehand");
+        /** @var DiceHand $hand*/
         $hand->roll();
 
         $roundTotal = $session->get("pig_round");
         $round = 0;
+        /** @var DiceHand $hand*/
         $values = $hand->getValues();
         foreach ($values as $value) {
             if ($value === 1) {
