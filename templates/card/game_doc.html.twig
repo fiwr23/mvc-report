@@ -1,0 +1,24 @@
+{% extends "base_card.html.twig" %}
+
+{% block title %}21 - Documentation{% endblock %}
+
+{% block main %}
+<h1>Documentation for the card game 21</h1>
+<p>
+<h2>Class structure</h2>
+Card -> Holds the card's text value and returns it on demand.<br>
+CardGraphic -> Holds the card's graphic value and returns it on demand. Extends Card.<br>
+CardHand -> Hold the drawn cards. Uses CardGraphic as komposition.<br>
+DeckofCards -> Makes the deck of cards on demand. Uses CardGraphic as komposition.<br>
+GameLogic -> Most game logic resides in this class.
+
+</p>
+<h2> Flowchart</h2>
+<img src="{{ asset('img/flode.jpeg') }}" alt="">
+<h2>Pseudo code</h2>
+<img src="{{ asset('img/pseudokod1.jpg') }}" alt="">
+<img src="{{ asset('img/pseudokod2.jpg') }}" alt="">
+<img src="{{ asset('img/pseudokod3.jpg') }}" alt="">
+
+
+{% endblock %}
