@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CardJsonController
 {
     #[Route("/api/deck", methods: ['GET'])]
-    public function jsonDeck(Request $request, SessionInterface $session): Response
+    public function jsonDeck(SessionInterface $session): Response
     {
         $deck = new DeckOfCards();
         $inOrderDeck = $deck->getAllCardsInOrder();
@@ -41,7 +41,7 @@ class CardJsonController
     }
 
     #[Route("api/deck/shuffle", name: "shuffle_json_post", methods: ['POST'])]
-    public function jsonShuffle(Request $request, SessionInterface $session): Response
+    public function jsonShuffle(SessionInterface $session): Response
     {
         $deck = new DeckOfCards();
         $shuffledDeck = $deck->getAllCardsShuffled();
@@ -66,35 +66,42 @@ class CardJsonController
     }
 
     #[Route("api/deck/draw", name: "draw_one_json_post", methods: ['POST'])]
-    public function jsonDrawOne(Request $request, SessionInterface $session): Response
+    public function jsonDrawOne(SessionInterface $session): Response
     {
         $deckAvailable = $session->get("deck_available");
-        if (!$deckAvailable) {
-            $deck = new DeckOfCards();
-            $shuffledDeck = $deck->getAllCardsShuffled();
-        } else {
-            $shuffledDeck = $session->get("current_deck");
+        switch (!$deckAvailable) {
+            case true:
+                $deck = new DeckOfCards();
+                $shuffledDeck = $deck->getAllCardsShuffled();
+                break;
+            default:
+                $shuffledDeck = $session->get("current_deck");
         }
 
         $drawnCards = [];
-        $howMany = 0;
-        if (count($shuffledDeck) === 0) {
-            $data = [
-                'warning' =>
-                'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
-            ];
-        } else {
-            $drawnCards = [array_pop($shuffledDeck)];
-            $cardsToSend = [];
-            foreach ($drawnCards as $x) {
-                array_push($cardsToSend, $x->getAsString());
+        $data = [];
+        if (is_countable($shuffledDeck)) {
+            // $howMany = 0;
+            if (count($shuffledDeck) === 0) {
+                $data = [
+                    'warning' =>
+                    'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
+                ];
+            } elseif (is_array($shuffledDeck)) {
+                $drawnCards = [array_pop($shuffledDeck)];
+                $cardsToSend = [];
+
+                /** @var CardGraphic $x*/
+                foreach ($drawnCards as $x) {
+                    array_push($cardsToSend, $x->getAsString());
+                }
+
+                $data = [
+                    "cardsLeft" => count($shuffledDeck),
+                    "cards" => $cardsToSend
+                ];
+
             }
-
-            $data = [
-                "cardsLeft" => count($shuffledDeck),
-                "cards" => $cardsToSend
-            ];
-
         }
 
         $session->set("deck_available", "yes");
@@ -110,38 +117,48 @@ class CardJsonController
     }
 
     #[Route("api/deck/draw/{num<\d+>}", name: "draw_many_num_json_post", methods: ['POST'])]
-    public function jsonDrawManyNum(int $num, Request $request, SessionInterface $session): Response
+    public function jsonDrawManyNum(int $num, SessionInterface $session): Response
     {
         $deckAvailable = $session->get("deck_available");
-        if (!$deckAvailable) {
-            $deck = new DeckOfCards();
-            $shuffledDeck = $deck->getAllCardsShuffled();
-        } else {
-            $shuffledDeck = $session->get("current_deck");
+        switch (!$deckAvailable) {
+            case true:
+                $deck = new DeckOfCards();
+                $shuffledDeck = $deck->getAllCardsShuffled();
+                break;
+            default:
+                $shuffledDeck = $session->get("current_deck");
         }
 
-        if ($num > count($shuffledDeck)) {
-            $data = [
-                'warning' => 'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
-            ];
-            $num = 0;
-        } else {
+        $data = [];
 
-            $drawnCards = [];
-            for ($x = 0; $x < $num; $x++) {
-                array_push($drawnCards, array_pop($shuffledDeck));
+        if (is_array($shuffledDeck) && is_countable($shuffledDeck)) {
+            switch ($num > count($shuffledDeck)) {
+                case true:
+                    $data = [
+                        'warning' => 'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
+                    ];
+                    $num = 0;
+                    break;
+                default:
+
+                    $drawnCards = [];
+                    for ($x = 0; $x < $num; $x++) {
+                        array_push($drawnCards, array_pop($shuffledDeck));
+                    }
+
+                    $cardsToSend = [];
+                    if (is_array($drawnCards)) {
+                        /** @var CardGraphic $x*/
+                        foreach ($drawnCards as $x) {
+                            array_push($cardsToSend, $x->getAsString());
+                        }
+                    }
+                    $data = [
+                        "cardsLeft" => count($shuffledDeck),
+                        "cards" => $cardsToSend
+                    ];
+
             }
-
-            $cardsToSend = [];
-            foreach ($drawnCards as $x) {
-                array_push($cardsToSend, $x->getAsString());
-            }
-
-            $data = [
-                "cardsLeft" => count($shuffledDeck),
-                "cards" => $cardsToSend
-            ];
-
         }
         $session->set("deck_available", "yes");
         $session->set("current_deck", $shuffledDeck);
