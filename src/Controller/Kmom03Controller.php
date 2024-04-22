@@ -289,7 +289,7 @@ class Kmom03Controller extends AbstractController
         $bankHandToSend = [];
 
         foreach ($bankHandArr as $x) {
-            array_push($plrHandToSend, $x->getAsString());
+            array_push($bankHandToSend, $x->getAsString());
         }
         $data = [
             "player_hand" => $plrHandToSend,
