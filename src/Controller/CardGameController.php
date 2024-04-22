@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Card\Card;
 use App\Card\CardGraphic;
+use App\Card\CardHand;
 use App\Card\DeckOfCards;
+use App\Card\GameLogic;
 
 // use App\Dice\DiceGraphic;
 // use App\Dice\DiceHand;
@@ -25,7 +27,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck", name: "show_deck")]
-    public function showDeck(Request $request, SessionInterface $session): Response
+    public function showDeck(SessionInterface $session): Response
     {
         $deck = new DeckOfCards();
         $inOrderDeck = $deck->getAllCardsInOrder();
@@ -40,7 +42,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck/shuffle", name: "shuffled_deck")]
-    public function shuffleDeck(Request $request, SessionInterface $session): Response
+    public function shuffleDeck(SessionInterface $session): Response
     {
         $deck = new DeckOfCards();
         $shuffledDeck = $deck->getAllCardsShuffled();
@@ -55,24 +57,26 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck/draw", name: "draw_one_card")]
-    public function drawOneCard(Request $request, SessionInterface $session): Response
+    public function drawOneCard(SessionInterface $session): Response
     {
         $deckAvailable = $session->get("deck_available");
-        if (!$deckAvailable) {
-            $deck = new DeckOfCards();
-            $shuffledDeck = $deck->getAllCardsShuffled();
-        } else {
-            $shuffledDeck = $session->get("current_deck");
+        switch (!$deckAvailable) {
+            case true:
+                $deck = new DeckOfCards();
+                $shuffledDeck = $deck->getAllCardsShuffled();
+                break;
+            default:
+                $shuffledDeck = $session->get("current_deck");
         }
 
         $drawnCards = [];
         $howMany = 0;
-        if (count($shuffledDeck) === 0) {
+        if (is_countable($shuffledDeck) && count($shuffledDeck) === 0) {
             $this->addFlash(
                 'warning',
                 'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
             );
-        } else {
+        } elseif (is_array($shuffledDeck)) {
             $drawnCards = [array_pop($shuffledDeck)];
             $howMany = 1;
         }
@@ -81,7 +85,7 @@ class CardGameController extends AbstractController
         $data = [
             "deckOfCards" => $drawnCards,
             "howMany" => $howMany,
-            "cardsLeft" => count($shuffledDeck)
+            "cardsLeft" => (is_countable($shuffledDeck)) ? count($shuffledDeck) : ''
         ];
 
 
@@ -89,7 +93,7 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/card/deck/draw/{num<\d+>}", name: "draw_many_cards")]
-    public function drawManyCards(int $num, Request $request, SessionInterface $session): Response
+    public function drawManyCards(int $num, SessionInterface $session): Response
     {
         /*
         $numCardsToDraw = $session->get("numCardsToDraw");
@@ -98,14 +102,16 @@ class CardGameController extends AbstractController
         } */
 
         $deckAvailable = $session->get("deck_available");
-        if (!$deckAvailable) {
-            $deck = new DeckOfCards();
-            $shuffledDeck = $deck->getAllCardsShuffled();
-        } else {
-            $shuffledDeck = $session->get("current_deck");
+        switch (!$deckAvailable) {
+            case true:
+                $deck = new DeckOfCards();
+                $shuffledDeck = $deck->getAllCardsShuffled();
+                break;
+            default:
+                $shuffledDeck = $session->get("current_deck");
         }
 
-        if ($num > count($shuffledDeck)) {
+        if (is_countable($shuffledDeck) && $num > count($shuffledDeck)) {
             $this->addFlash(
                 'warning',
                 'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
@@ -114,17 +120,20 @@ class CardGameController extends AbstractController
         }
 
         $drawnCards = [];
-        for ($x = 0; $x < $num; $x++) {
-            array_push($drawnCards, array_pop($shuffledDeck));
-        }
+        $data = [];
+        if (is_array($shuffledDeck)) {
+            for ($x = 0; $x < $num; $x++) {
+                array_push($drawnCards, array_pop($shuffledDeck));
+            }
 
-        $session->set("deck_available", "yes");
-        $session->set("current_deck", $shuffledDeck);
-        $data = [
-            "deckOfCards" => $drawnCards,
-            "howMany" => $num,
-            "cardsLeft" => count($shuffledDeck)
-        ];
+            $session->set("deck_available", "yes");
+            $session->set("current_deck", $shuffledDeck);
+            $data = [
+                "deckOfCards" => $drawnCards,
+                "howMany" => $num,
+                "cardsLeft" => count($shuffledDeck)
+            ];
+        }
 
 
         return $this->render('card/draw_many_cards.html.twig', $data);
@@ -132,8 +141,8 @@ class CardGameController extends AbstractController
 
     #[Route("/card/deck/draw_post", name: "draw_many_post", methods: ['POST'])]
     public function drawManyPost(
-        Request $request,
-        SessionInterface $session
+        Request $request
+        // SessionInterface $session
     ): Response {
         $numCardsToDraw = $request->request->get('numCardsToDraw');
         // $session->set('numCardsToDraw', $numCardsToDraw);
