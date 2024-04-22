@@ -3,7 +3,9 @@
 {% block title %}API{% endblock %}
 
 {% block body %}
+    {{ include('flash.html.twig') }}
     <h1>API</h1>
+    <a href="./api/game"><span style=" font-size: 24px; color: black;">Game</span></a><br>
     <a href="./api/quote"><span style=" font-size: 24px; color: black;">Quote</span></a><br>
     <a href="./api/deck"><span style=" font-size: 24px;" color: black;">Show deck in order</span></a><br>
     <h3>Show shuffled deck via POST</h3>
