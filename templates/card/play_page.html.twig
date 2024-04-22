@@ -1,0 +1,48 @@
+{% extends "base_card.html.twig" %}
+
+{% block title %}21 The Game{% endblock %}
+
+{% block main %}
+<h1>The game of 21</h1>
+        {% if game_state != 'ongoing' %}
+            <form id="next_round" class="form21 "method="POST" action="{{ path('next_round_21') }}">
+            <input type="submit" name="do_it" value="Play next round">
+        {% endif %}
+    <div class="row">
+        <div class="column">
+            <p><b>Player. Wins: {{ player_wins }}</b><br>
+            Current hand: {{ player_hand_score }}<br>
+            {% if current_player == 'player' and  game_state == 'ongoing' %}
+            Card drawn: {{ last_player_card }}</p>
+            <form class="form21" method="POST" action="{{ path('draw_one_card_21') }}">
+            <input type="submit" name="do_it" value="Draw Card">
+            {% if player_hand != [] and player_hand != "" %}
+            </form><form class="form21" method="POST" action="{{ path('switch_to_bank_21') }}">
+            <input type="submit" name="do_it" value="Stay">
+            </form>
+            {% endif %}
+            {% endif %}
+
+            <p>{% for value in player_hand %}
+                <span class="die">{{ value.getAsString() }}</span>
+            {% endfor %}</p>
+        </div>
+        <div class="column">
+            <p><b>Bank. Wins: {{ bank_wins }}</b><br>
+            Current hand: {{ bank_hand_score }}<br>
+            {% if current_player == 'bank' and game_state == 'ongoing' %}
+            Card drawn: {{ last_bank_card }}</p>
+            <form class="form21" method="POST" action="{{ path('draw_one_card_21') }}">
+            <input type="submit" name="do_it" value="Bank's next move">
+            </form>
+            {% endif %}
+
+            <p>{% for value in bank_hand %}
+                <span class="die">{{ value.getAsString() }}</span>
+            {% endfor %}</p>
+
+            </p>
+            
+        </div>
+    </div>
+{% endblock %}
