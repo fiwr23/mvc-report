@@ -4,6 +4,9 @@ namespace App\Card;
 
 class CardGraphic extends Card
 {
+    /**
+    * @var (string)
+    */
     protected $graphicValue;
 
     public function __construct(string $textIn, string $graphicIn)
