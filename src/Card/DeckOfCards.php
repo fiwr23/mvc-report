@@ -4,6 +4,9 @@ namespace App\Card;
 
 use App\Card\CardGraphic;
 
+/**
+ * DeckOfCards class, constructs/shuffles deck of cards.
+ */
 class DeckOfCards
 {
     /**
@@ -75,6 +78,8 @@ class DeckOfCards
     ];
 
     /**
+     * Takes two arrays and returns [arrOne, arrTwo].
+     *
     * @param  array<string|int> $arrOne
     * @param  array<string|int> $arrTwo
     * @return array<int, array<int|string>>
@@ -85,6 +90,8 @@ class DeckOfCards
         return [$arrOne,$arrTwo];
     }
     /**
+     * Returns all cards in a deck in order.
+     *
     * @return array<CardGraphic>
     */
     public function getAllCardsInOrder(): array
@@ -115,6 +122,8 @@ class DeckOfCards
         return $cardArray;
     }
     /**
+     * Returns all cards in a deck shuffled
+     * .
     * @return array<CardGraphic>
     */
     public function getAllCardsShuffled(): array
