@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Card Json controller.
+ */
 class CardJsonController
 {
     #[Route("/api/deck", methods: ['GET'])]
