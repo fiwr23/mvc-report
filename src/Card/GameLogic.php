@@ -11,9 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+* GameLogic class, contains most game functions.
+*/
 class GameLogic
 {
     /**
+     * Resets everything for new game.
+     *
     * @return array<mixed>
     */
     public function newGame(): array
@@ -41,6 +46,8 @@ class GameLogic
     }
 
     /**
+     * Draws one card then checks game state.
+     *
     * @param  array<CardGraphic> $currentDeckIn
     * @return array<mixed>
     */
@@ -110,6 +117,7 @@ class GameLogic
     }
 
     /**
+    * Takes cardHand and sums the score(s).
     *
     * @return array<int>
     */
@@ -148,6 +156,7 @@ class GameLogic
     }
 
     /**
+    * Checks if game is over.
     *
     * @param array<int> $sumArrayIn
     * @param array<int> $opponentSumArrayIn
@@ -183,6 +192,7 @@ class GameLogic
     }
 
     /**
+    * If current player is bank then stop if sum over 17.
     *
     * @param array<int> $opponentSumArrayIn
     * @return string
@@ -208,6 +218,7 @@ class GameLogic
     }
 
     /**
+    * Resets everything for next round, Wins/losses not affected.
     *
     * @return array<mixed>
     */
@@ -236,6 +247,7 @@ class GameLogic
     }
 
     /**
+     * Returns player's cardhand score(s) as string.
     * @param array<int> $arrayIn
     * @return string
     */
