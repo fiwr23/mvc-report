@@ -16,6 +16,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Card game controller for kmom03.
+ */
 class Kmom03Controller extends AbstractController
 {
     #[Route("/game", name: "card_game_home")]
