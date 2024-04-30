@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for session page.
+ */
 class SessionController extends AbstractController
 {
     #[Route("/session", name: "view_session", methods: ['GET'])]
