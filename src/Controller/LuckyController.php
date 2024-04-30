@@ -5,6 +5,9 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Lucky controller.
+ */
 class LuckyController
 {
     #[Route('/lucky/number')]
