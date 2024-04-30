@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for displaying random images.
+ */
 class ReportTwig extends AbstractController
 {
     #[Route("/lucky", name: "lucky")]
