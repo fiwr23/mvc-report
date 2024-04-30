@@ -15,6 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Dice game controller.
+ */
 class DiceGameController extends AbstractController
 {
     #[Route("/game/pig", name: "pig_start")]
