@@ -5,6 +5,8 @@
 {% block body %}
     {{ include('flash.html.twig') }}
     <h1>API</h1>
+    <a href="{{ path('book_show_all') }}"><span style=" font-size: 24px; color: black;">Show all books as JSON</span></a><br>
+    <a href="{{ path('book_by_isbn', {isbn: 1234567}) }}"><span style=" font-size: 24px; color: black;">Show one book by ISBN as JSON</span></a><br>
     <a href="./api/game"><span style=" font-size: 24px; color: black;">Game</span></a><br>
     <a href="./api/quote"><span style=" font-size: 24px; color: black;">Quote</span></a><br>
     <a href="./api/deck"><span style=" font-size: 24px;" color: black;">Show deck in order</span></a><br>
