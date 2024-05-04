@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ book.getTitle|e }}{% endblock %}
+
+{% block body %}
+{{ include('flash.html.twig') }}
+<a href="{{ path('book_view_all') }}"><span style=" font-size: 14px; color: black;">< View all</span></a>
+<h1>{{ book.getTitle|e }}</h1>
+<div>
+    {% if localimg == true %}
+    <img src="{{ asset(book.getImage|e) }}" class="library_img" alt="A book image">
+    {% else %}
+    <img src="{{ book.getImage|e }}" class="library_img" alt="A book image">
+    {% endif %}
+</div>
+Author: {{ book.getAuthor|e }}<br>
+ISBN: {{ book.getIsbn|e }}<br>
+<ul>
+<li><a href="{{ path('update_book_by_id', {bookid: book.getId|e}) }}"><span style=" font-size: 24px; color: black;">UPDATE BOOK</span></a></li>
+<li><a href="{{ path('confirm_deletion_by_id', {bookid: book.getId|e}) }}"><span style=" font-size: 24px; color: black;">DELETE BOOK (requires confirmation)</span></a></li>
+</ul>
+{% endblock %}

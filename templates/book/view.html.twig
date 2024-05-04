@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Available books{% endblock %}
+
+{% block body %}
+{{ include('flash.html.twig') }}
+<a href="{{ path('app_library') }}"><span style=" font-size: 14px; color: black;">< Back</span></a>
+<h1>Available books</h1>
+Select one book for more information/update option/delete option.<br>
+Alice in Wonderland is used for the ISBN JSON link so dont delete/update that one.
+
+<ul>
+    <table>
+    <tr><th>Title</th><th>Author</th></tr>
+    {% for book in books %}
+        <tr> 
+        <td><a href="{{ path('view_book_by_id', {bookid: book.getId|e}) }}"><span style=" font-size: 24px; color: black;">{{ book.getTitle|e }}</span></a></td>
+        <td><a href="{{ path('view_book_by_id', {bookid: book.getId|e}) }}"><span style=" font-size: 24px; color: black;">{{ book.getAuthor|e }}</span></a></td>
+        <!-- <li><a href="{{ path('view_book_by_id', {bookid: book.getId|e}) }}"><span style=" font-size: 24px; color: black;">{{ book.getTitle|e }} by {{ book.getAuthor|e }}</span></a></li> -->
+        </tr>
+    {% endfor %}
+    </table>
+</ul>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+<h1>The Library</h1>
+    <ul>
+    <li><a href="{{ path('book_view_all') }}"><span style=" font-size: 24px; color: black;">Show all books</span></a></li>
+    <li><a href="{{ path('create_new_book_form')}}"><span style=" font-size: 24px; color: black;">Create new book by filling in a form</span></a></li>
+    <li><a href="./book/create"><span style=" font-size: 24px; color: black;">Auto create a random book</span></a></li>
+    <li><a href="{{ path('book_show_all') }}"><span style=" font-size: 24px; color: black;">Show all books as JSON</span></a></li>
+    <li><a href="{{ path('book_by_isbn', {isbn: 1234567}) }}"><span style=" font-size: 24px; color: black;">Show one book by ISBN as JSON</span></a></li>
+    </ul>
+    <!-- <h1>Hello {{ controller_name }}! ✅</h1> -->
+    
+    <!-- This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>/home/filip/dbwebb-kurser/mvc/me/report/src/Controller/BookController.php</code></li>
+        <li>Your template at <code>/home/filip/dbwebb-kurser/mvc/me/report/templates/book/index.html.twig</code></li>
+    </ul> -->
+
+</div>
+{% endblock %}

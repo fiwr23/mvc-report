@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Book{% endblock %}
+
+{% block body %}
+<h1>Create New Book</h1>
+
+<form name = "form_new_book" id = "form_new_book" method="POST" action="{{ path("create_new_book_post")}}">
+    <label for="bookTitle">Title</label><br>
+    <input type="input" id = "bookTitle" name = "bookTitle" value="" required>
+    <br>
+    <label for="bookImage">Image</label><br>
+    <input type="input" id = "bookImage" name = "bookImage" value="" required>
+    <br>
+    <label for="bookAuthor">Author</label><br>
+    <input type="input" id = "bookAuthor" name = "bookAuthor" value="" required>
+    <br>
+    <label for="bookIsbn">ISBN</label><br>
+    <input type="input" id = "bookIsbn" name = "bookIsbn" value="" required>
+    <br>
+    <input type="submit" name="do_it" value="Create New Book">
+</form>
+{% endblock %}

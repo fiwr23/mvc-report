@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delition of {{ book.getTitle|e }}{% endblock %}
+
+{% block body %}
+<a href="{{ path('view_book_by_id', {bookid: book.getId|e}) }}"><span style=" font-size: 14px; color: black;">< Back</span></a>
+<h1>Confirm deletion of {{ book.getTitle|e }}</h1>
+<div>
+    {% if localimg == true %}
+    <img src="{{ asset(book.getImage|e) }}" class="library_img" alt="A book image">
+    {% else %}
+    <img src="{{ book.getImage|e }}" class="library_img" alt="A book image">
+    {% endif %}
+</div>
+Author: {{ book.getAuthor|e }}<br>
+ISBN: {{ book.getIsbn|e }}<br>
+<form name = "form_confirm_deletion" id = "form_confirm_deletion" method="POST" action="{{ path("delete_book_post")}}">
+    <label for="bookId">Id</label>
+    <input type="input" id = "bookId" name = "bookId" value="{{ book.getId|e }}" readonly style="background-color: rgb(161, 234, 154);"></input>
+    <input type="submit" name="do_it" value="Yes, delete this book"></input>
+</form>
+{% endblock %}
