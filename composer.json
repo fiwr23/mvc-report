@@ -1,4 +1,6 @@
 {
+    "name": "fiwr23/fiwr23",
+    "description": "mvc kursen",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
@@ -95,7 +97,8 @@
             "@phpstan"
         ],
         "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
-        "phpdoc": "tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml"
+        "phpdoc": "tools/phpdoc/phpdoc --config=tools/phpdoc/phpdoc.xml",
+        "phpmetrics": "tools/phpmetrics/vendor/bin/phpmetrics --config=phpmetrics.json"
     },
     "conflict": {
         "symfony/symfony": "*"
