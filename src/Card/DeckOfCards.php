@@ -136,6 +136,7 @@ class DeckOfCards
 
         $allCards = array_merge($spades, $hearts, $diamonds, $clubs);
         */
+        /** @scrutinizer ignore-call */
         $allCards = self::getAllCardsInOrder();
 
         shuffle($allCards);
