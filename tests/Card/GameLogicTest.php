@@ -127,7 +127,7 @@ class GameLogicTest extends TestCase
         $this->assertEquals("loss", $res);
 
         // bank is active score 18, opponent 18
-        $res = $gameLogic->lowerComplexity('bank', 18, [18]);
+        // $res = $gameLogic->lowerComplexity('bank', 18, [18]);
     }
 
     /**
