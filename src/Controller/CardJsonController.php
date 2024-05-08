@@ -81,7 +81,7 @@ class CardJsonController
                 $shuffledDeck = $session->get("current_deck");
         }
 
-        $drawnCards = [];
+        // $drawnCards = [];
         $data = [];
         if (is_countable($shuffledDeck)) {
             // $howMany = 0;
@@ -140,7 +140,7 @@ class CardJsonController
                     $data = [
                         'warning' => 'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
                     ];
-                    $num = 0;
+                    // $num = 0;
                     break;
                 default:
 
