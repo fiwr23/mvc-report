@@ -68,14 +68,14 @@ class GameLogic
         $bankWins = $bankWinsIn;
 
 
-        if (is_array($currentDeck)) {
-            /** @var array<CardGraphic> $currentDeck*/
-            $drawnCard = array_pop($currentDeck);
-            /** @var CardGraphic $drawnCard*/
-            $cardHand->add($drawnCard);
-            /** @var CardGraphic $drawnCard*/
-            $lastPlayerCard = $drawnCard->getTextAsString();
-        }
+        // if (is_array($currentDeck)) {
+        /** @var array<CardGraphic> $currentDeck*/
+        $drawnCard = array_pop($currentDeck);
+        /** @var CardGraphic $drawnCard*/
+        $cardHand->add($drawnCard);
+        /** @var CardGraphic $drawnCard*/
+        $lastPlayerCard = $drawnCard->getTextAsString();
+        //}
 
         $currentHandScore = $this->sumCurrentHand($cardHand);
         $opponentHandScore = $this->sumCurrentHand($opponentHand);
@@ -139,7 +139,7 @@ class GameLogic
 
         }
         $handSum = array_sum($handAsNumbers);
-        $handSum2 = 0;
+        // $handSum2 = 0;
         $toReturn = [$handSum];
 
         if (in_array(1, $handAsNumbers)) {
