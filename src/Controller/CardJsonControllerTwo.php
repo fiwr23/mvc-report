@@ -34,14 +34,18 @@ class CardJsonControllerTwo
                 $shuffledDeck = $session->get("current_deck");
         }
 
-        $data = [];
+        // $data = [];
         $numChecker = new CheckNumCards();
 
         /** @var array<CardGraphic|null> $shuffledDeck*/
         $data = $numChecker->check($num, $shuffledDeck);
 
+        $shuffledDeck = $data['shuffledDeck'];
+
         $session->set("deck_available", "yes");
         $session->set("current_deck", $shuffledDeck);
+
+        unset($data['shuffledDeck']);
 
         // return new JsonResponse($data);
 
