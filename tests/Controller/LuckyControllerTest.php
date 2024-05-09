@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use PHPUnit\Framework\TestCase;
 
-
 /*
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
@@ -28,8 +27,11 @@ class LuckyControllerTest extends TestCase
         $res = $luckyController->number();
         $this->assertNotEmpty($res);
         // $res = json_encode($res);
-        $resPart = substr($res->getContent(), 0, 6);
+        $resPart = "";
 
+        if ($res->getContent()) {
+            $resPart = substr($res->getContent(), 0, 6);
+        }
         $this->assertEquals("<html>", $resPart);
     }
 
@@ -44,8 +46,11 @@ class LuckyControllerTest extends TestCase
         $res = $luckyController->number();
         $this->assertNotEmpty($res);
         // $res = json_encode($res);
-        $resPart = substr($res->getContent(), 0, 6);
+        $resPart = "";
 
+        if ($res->getContent()) {
+            $resPart = substr($res->getContent(), 0, 6);
+        }
         $this->assertEquals("<html>", $resPart);
     }
 
