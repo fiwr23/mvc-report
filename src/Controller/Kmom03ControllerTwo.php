@@ -7,6 +7,7 @@ use App\Card\CardGraphic;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
 use App\Card\GameLogic;
+use App\Card\GameLogicTwo;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -70,7 +71,7 @@ class Kmom03ControllerTwo extends AbstractController
         SessionInterface $session
     ): Response {
 
-        $gameLogic = new GameLogic();
+        $gameLogic = new GameLogicTwo();
 
         $toStore = $gameLogic->nextRound();
 
