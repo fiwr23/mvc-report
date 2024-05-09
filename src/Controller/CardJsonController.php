@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Card\Card;
 use App\Card\CardGraphic;
+use App\Card\CheckNumCards;
 use App\Card\DeckOfCards;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -83,33 +84,18 @@ class CardJsonController
 
         // $drawnCards = [];
         $data = [];
-        if (is_countable($shuffledDeck)) {
-            // $howMany = 0;
-            if (count($shuffledDeck) === 0) {
-                $data = [
-                    'warning' =>
-                    'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
-                ];
-            } elseif (is_array($shuffledDeck)) {
-                $drawnCards = [array_pop($shuffledDeck)];
-                $cardsToSend = [];
+        $numChecker = new CheckNumCards();
 
-                /** @var CardGraphic $x*/
-                foreach ($drawnCards as $x) {
-                    array_push($cardsToSend, $x->getAsString());
-                }
+        /** @var array<CardGraphic|null> $shuffledDeck*/
+        $data = $numChecker->check(1, $shuffledDeck);
 
-                $data = [
-                    "cardsLeft" => count($shuffledDeck),
-                    "cards" => $cardsToSend
-                ];
+        $shuffledDeck = $data['shuffledDeck'];
 
-            }
-        }
 
         $session->set("deck_available", "yes");
         $session->set("current_deck", $shuffledDeck);
 
+        unset($data['shuffledDeck']);
         // return new JsonResponse($data);
 
         $response = new JsonResponse($data);
