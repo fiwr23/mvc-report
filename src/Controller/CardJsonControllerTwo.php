@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Card\Card;
 use App\Card\CardGraphic;
+use App\Card\CheckNumCards;
 use App\Card\DeckOfCards;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,8 @@ class CardJsonControllerTwo
     #[Route("api/deck/draw/{num<\d+>}", name: "draw_many_num_json_post", methods: ['POST'])]
     public function jsonDrawManyNum(int $num, SessionInterface $session): Response
     {
+        $shuffledDeck = [];
+
         $deckAvailable = $session->get("deck_available");
         switch (!$deckAvailable) {
             case true:
@@ -32,36 +35,11 @@ class CardJsonControllerTwo
         }
 
         $data = [];
+        $numChecker = new CheckNumCards();
 
-        if (is_array($shuffledDeck) && is_countable($shuffledDeck)) {
-            switch ($num > count($shuffledDeck)) {
-                case true:
-                    $data = [
-                        'warning' => 'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
-                    ];
-                    // $num = 0;
-                    break;
-                default:
+        /** @var array<CardGraphic|null> $shuffledDeck*/
+        $data = $numChecker->check($num, $shuffledDeck);
 
-                    $drawnCards = [];
-                    for ($x = 0; $x < $num; $x++) {
-                        array_push($drawnCards, array_pop($shuffledDeck));
-                    }
-
-                    $cardsToSend = [];
-                    if (is_array($drawnCards)) {
-                        /** @var CardGraphic $x*/
-                        foreach ($drawnCards as $x) {
-                            array_push($cardsToSend, $x->getAsString());
-                        }
-                    }
-                    $data = [
-                        "cardsLeft" => count($shuffledDeck),
-                        "cards" => $cardsToSend
-                    ];
-
-            }
-        }
         $session->set("deck_available", "yes");
         $session->set("current_deck", $shuffledDeck);
 
