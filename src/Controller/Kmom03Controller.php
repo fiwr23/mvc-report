@@ -7,6 +7,7 @@ use App\Card\CardGraphic;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
 use App\Card\GameLogic;
+use App\Card\GameLogicTwo;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +42,7 @@ class Kmom03Controller extends AbstractController
             case false:
                 return $this->redirectToRoute('ongoing');
             default:
-                $gameLogic = new GameLogic();
+                $gameLogic = new GameLogicTwo();
                 $toStore = $gameLogic->newGame();
                 foreach ($toStore as $key => $value) {
                     //$session->set("current_deck", $shuffledDeck);
@@ -156,7 +157,7 @@ class Kmom03Controller extends AbstractController
                 break;
         }
 
-        $gameLogic = new GameLogic();
+        $gameLogic = new GameLogicTwo();
 
         /**
          * @var array<int> $playerHandScore
