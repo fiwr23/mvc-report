@@ -1,0 +1,119 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block body %}
+<h1>Metrics</h1>
+<h2>Introduktion</h2>
+    <p>Codestyle <br>
+    Coverage mäter hur pass väl klasser är unit testade. 100% önskas.<br>Bla min GameLogic klass 
+    har 100% code coverage. Kontroller klasserna däremot har 0%. <br>
+    Complexity är ett mätvärde på hur komplex koden är. Höga värden är dåligt. 
+    Sämsta klassen i denna skalan är Gamelogic klassen med 24 enligt Php metrics. 
+    Sämsta metoden enligt metrics finns i samma klass med 8 i komplexitet.<br> 
+    Cohesion eller Lack of cohesion of methods (LCOM) är ett mätvärde för hur väl metoder 
+    i en klass hör ihop. Lågt värde visar hög Cohesion vilket önskas. 
+    Exempelvis klassen CardGraphic har 1 enligt Php metrics. 
+    Högt värde visar låg Cohesion vilket tyder på att klassen borde delas upp. 
+    Exempelvis CardJsonController har LCOM 4 enligt Php metrics.<br>
+    Coupling är ett mätvärde på hur många klasser som en klass använder sig av eller 
+    blir använd av. Afferent Coupling (AC) är hur många andra klasser en klass har utgående 
+    kontakt med. Exempelvis min DeckOfCards har 3. Efferent Coupling (EC) är ett mätvärde på hur 
+    många klasser som en klass får ingående kontakt med. Exempelvis DiceGameController har 6.<br>
+    CRAP Är ett värde på antalet test i förhållande till komplexiteten.
+	Metoden drawOneCard() i GameLogic klassen har exempelvis värdet 8.</p>
+<h2>Phpmetrics</h2>
+    <p>
+    Direkt på första sidan dras ögonen till den genererade bilden med färgade cirklar. 
+    Den visualiserar klassernas maintainability/complexity. Ett antal klasser är röda beroende 
+    på att de har komplexitet över 10. Värst är GameLogic klassen med 24. Vidare på sidan 
+    ser man att det finns inga critical eller errors under Violations. Däremot finns 
+    allmänna Halstead warnings. Dessa har troligtvis att göra med att kontroller klasserna conditions
+    samt att de inte har någon coverage. Troligtvis beror klassernas 0.2 buggar i medel också på conditions 
+    och brist på coverage.<br>
+    Klickar man sig vidare kan man se att unit testerna har 100 assertions. 
+    Det påpekas även att kontroller klasserna inte testas för närvarande.<br>
+    I Php metrics rapporten kan man också se coupling och storlek men de var inte av 
+    särskilt intresse då inga värden verkade onormala. Cohesion visade däremot några klasser 
+    över värdet 1.<br>
+    Förbättringspotential finns uppenbarligen. Complexity och maintainablity skulle bli bättre om 
+    klasser delas upp. Cohesion skulle också bli bättre. Om man om möjligt unittestar kontroller 
+    klasserna borde kanske crap kunna minskas och kanske även Halstead varningarna försvinna.<br><br> 
+    Mätvärden som förhoppningsvis kommer kunna förbättras:<br>
+    GameLogic<br>
+    Complexity 24.<br>
+    Maintainability Index 62.97.<br>
+    Cohesion (LCOM) 4.<br><br>
+
+    Kmom03Controller<br>
+    Complexity 18<br>
+    Maintainability Index 61.77<br>
+    Cohesion (LCOM) 1<br><br>
+
+    CardJSONController<br>
+    Complexity 15<br>
+    Maintainability Index 64.47<br>
+    Cohesion (LCOM) 4<br><br>
+
+
+    CardGameController<br>
+    Complexity 11<br>
+    Maintainability Index 64.85<br>
+    Cohesion 2<br><br>
+
+    DiceGameController<br>
+    Complexity 9<br>
+    Maintainability Index 72.11<br>
+    Cohesion 2<br><br>
+    
+    BookController<br>
+    Complexity 9<br>
+    Maintainability Index 67.33<br>
+    Cohesion 1<br><br>
+
+    </p>
+    <h2>Scrutinizer</h2>
+    <p>
+    Efter en längre väntan på Scrutinizer rapporten blev jag positivt överraskad 
+    vid synen av en grön cirkel med värdet 9.72 och omdömet Very good. I stort verkar min kod 
+    vara helt okej. Men vid närmare titt på badgesarna ser man coveragen lyser röd med 22% 
+    täckning. Nu var inte det direkt överraskande då jag vet att kontroller klasserna räknas in. 
+    De är i stort inte unit testade medan de andra klasserna har 100% täckning.<br>
+    Sedan uppmärksammades jag på att det finns 11 issues att ta sig en närmare titt på. 
+    Efter lite analyserande ser jag att 3 av dem inte har med min skrivna kod att göra. 
+    En kernel samt cs-fixer fil får påpekanden och de tänker jag lämna därhän. 
+    Resterande 8 klagomålen gäller bug, unused code, best practise och comprehensibility. 
+    När jag klickade fram kodraderna ifråga blir jag lite tveksam om Scrutinizer har helt rätt i 
+    sina påpekanden. Två av dem ser direkt bör åtgärdas men resten måste jag analysera närmare.<br>
+
+    Sedan tog jag mig en titt på betygen för de individuella klasserna och metoderna. 
+    Alla klasserna fick betyg A medan ett antal metoder fick betyget B som sämst. 
+    Det verkar som att det beror dels på att de har conditions över 6 samt ett CRAP värde över 30.<br><br>
+
+    De tre sämsta metoderna är:<br>
+    CardJsonController::jsonDrawManyNum() Conditions: 8 CRAP: 72<br>
+    Kmom03Controller::drawOneCard21Post() Conditions: 6 CRAP: 42<br>
+    CardJsonController::jsonDrawOne() Conditions: 6 CRAP 42<br><br>
+
+    </p>
+
+    <h3>Scrutinizers badges:</h3>
+    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/quality-score.png?b=main" alt="scrutinizer">
+    
+    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/coverage.png?b=main" alt="coverage">
+
+    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/build.png?b=main" alt="build"> 
+    
+    <h2>Förbättringar</h2>
+    <p>
+    Först vill jag åtgärda de 8 issues Scrutinizer pekat ut.<br>
+    Sedan vill jag minska komplexiteten i de klasserna som lyser rött hos PHPmetrics 
+    genom att dela upp dem.<br>
+    Därefter ska jag försöka höja Scrutinizer betyget till A på några av B metoder. 
+    Coverage och CRAP borde bättras samtidigt.<br>
+    </p>
+    <h2>Analys Före/Efter</h2>
+    <p></p>
+    <h2>Diskussion</h2>
+
+{% endblock %}
