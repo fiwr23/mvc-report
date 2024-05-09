@@ -12,14 +12,15 @@ class CheckNumCards
     /**
      * Returns data array.
      * @param array<null|CardGraphic> $shuffledDeck
-     * @return array<string,array<string>|int>|array<string>
+     * @return array<string, array<CardGraphic|string|null>|int|string>
     */
     public function check(int $num, array $shuffledDeck): array
     {
         switch ($num > count($shuffledDeck)) {
             case true:
                 return [
-                    'warning' => 'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session'
+                    'warning' => 'Too few cards in deck! Reset by clicking on card/deck/shuffle or delete session',
+                    "shuffledDeck" => $shuffledDeck
                 ];
             default:
 
@@ -41,7 +42,8 @@ class CheckNumCards
                 /** @var array<string> $cardsToSend*/
                 return [
                     "cardsLeft" => $tmpCount,
-                    "cards" => $cardsToSend
+                    "cards" => $cardsToSend,
+                    "shuffledDeck" => $shuffledDeck
                 ];
         }
     }
