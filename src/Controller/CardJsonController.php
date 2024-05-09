@@ -83,7 +83,7 @@ class CardJsonController
         }
 
         // $drawnCards = [];
-        $data = [];
+        // $data = [];
         $numChecker = new CheckNumCards();
 
         /** @var array<CardGraphic|null> $shuffledDeck*/
