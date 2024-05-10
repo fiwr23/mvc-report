@@ -142,7 +142,25 @@
     </div>
     <div id="kmom06" class="kmom">
     <h2>kmom06</h2>
-    <p>Text</p>
+    <p>Phpmetrics rapporten gav en hel del information men det jag mest uppskattade var bilden där 
+    klasserna visualiserades som cirklar i olika färger. Dominansen av röd färg i den första 
+    rapporten fick mig direkt inse att åtgärder krävdes. Att namn, komplexitet och maintainability 
+    index poppade upp vid hovring med pekaren uppskattades också.<br>
+    Scrutinizer gav mig betyget 9.78 i kvalitet efter första bygget. Med "Very good" som omdöme 
+    verkade allt vara okej, men när jag klickade mig vidare fann jag att koden hade ett antal 
+    issues. Det visade sig vara minor issues som oanvänd kod och onödiga conditions. 
+    Kodtäckningen var 22% vilket gav utrymme till förbättring.<br>
+    Badges med betyg kan definitivt leda till bättre kodkvalitet. Man blir mer sporrad att 
+    förbättra och optimera när man ser sådana värden öka. Men vis av erfarenheten kan jag säga 
+    att den ivern till förbättring kan leda till en massa merarbete. Då jag åtgärdade 
+    komplexiteten i metoder och klasser genom att bryta ut kodavsnitt dök oanade fel upp. 
+    Värst var den gången då ett uppdaterat värde inte sparades i sessionen längre på grund av 
+    ommöblerandet. Inga fel meddelanden poppade upp utan först när jag kollade sessionen 
+    uppdagades missen.<br>
+    Mitt TIL för det här momentet är att CI (Continuous Integration) betyder automatisk testning 
+    och validering av kod. CD (Continuous Delivery) automatiserar delar av release processen. 
+    Continuous Delivery kräver ett godkännande innan publicering medan Continuous Deployment 
+    gör det automatiskt.</p>
     </div>
     <div id="kmom10" class="kmom">
     <h2>kmom10</h2>
