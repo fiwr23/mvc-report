@@ -5,7 +5,8 @@
 {% block body %}
 <h1>Metrics</h1>
 <h2>Introduktion</h2>
-    <p>Codestyle <br>
+    <p>Codestyle är ett antal regler man bör följa i sitt kodande. 
+    Om alla programmerare presenterar sin kod enligt samma codestyle ökar readabilityn.<br>
     Coverage mäter hur pass väl klasser är unit testade. 100% önskas.<br>Bla min GameLogic klass 
     har 100% code coverage. Kontroller klasserna däremot har 0%. <br>
     Complexity är ett mätvärde på hur komplex koden är. Höga värden är dåligt. 
@@ -23,6 +24,7 @@
     CRAP Är ett värde på antalet test i förhållande till komplexiteten.
 	Metoden drawOneCard() i GameLogic klassen har exempelvis värdet 8.</p>
 <h2>Phpmetrics</h2>
+<img src="{{ asset('img/phpmetrics-before.jpg') }}" alt="phpmetrics image">
     <p>
     Direkt på första sidan dras ögonen till den genererade bilden med färgade cirklar. 
     Den visualiserar klassernas maintainability/complexity. Ett antal klasser är röda beroende 
@@ -41,41 +43,42 @@
     klasserna borde kanske crap kunna minskas och kanske även Halstead varningarna försvinna.<br><br> 
     Mätvärden som förhoppningsvis kommer kunna förbättras:<br>
     GameLogic<br>
-    Complexity 24.<br>
-    Maintainability Index 62.97.<br>
-    Cohesion (LCOM) 4.<br><br>
+    Complexity: 24<br>
+    Maintainability Index: 62.97.<br>
+    Cohesion (LCOM): 4<br><br>
 
     Kmom03Controller<br>
-    Complexity 18<br>
-    Maintainability Index 61.77<br>
-    Cohesion (LCOM) 1<br><br>
+    Complexity: 18<br>
+    Maintainability Index: 61.77<br>
+    Cohesion (LCOM): 1<br><br>
 
     CardJSONController<br>
-    Complexity 15<br>
-    Maintainability Index 64.47<br>
-    Cohesion (LCOM) 4<br><br>
+    Complexity: 15<br>
+    Maintainability Index: 64.47<br>
+    Cohesion (LCOM): 4<br><br>
 
 
     CardGameController<br>
-    Complexity 11<br>
-    Maintainability Index 64.85<br>
-    Cohesion 2<br><br>
+    Complexity: 11<br>
+    Maintainability Index: 64.85<br>
+    Cohesion (LCOM): 2<br><br>
 
     DiceGameController<br>
-    Complexity 9<br>
-    Maintainability Index 72.11<br>
-    Cohesion 2<br><br>
+    Complexity: 9<br>
+    Maintainability Index: 72.11<br>
+    Cohesion (LCOM): 2<br><br>
     
     BookController<br>
-    Complexity 9<br>
-    Maintainability Index 67.33<br>
-    Cohesion 1<br><br>
+    Complexity: 9<br>
+    Maintainability Index: 67.33<br>
+    Cohesion (LCOM): 1<br><br>
 
     </p>
     <h2>Scrutinizer</h2>
+    <img src="{{ asset('img/scrutinizer-before.jpg') }}" alt="scrutinizer image">
     <p>
     Efter en längre väntan på Scrutinizer rapporten blev jag positivt överraskad 
-    vid synen av en grön cirkel med värdet 9.72 och omdömet Very good. I stort verkar min kod 
+    vid synen av en grön cirkel med värdet 9.78 och omdömet Very good. I stort verkar min kod 
     vara helt okej. Men vid närmare titt på badgesarna ser man coveragen lyser röd med 22% 
     täckning. Nu var inte det direkt överraskande då jag vet att kontroller klasserna räknas in. 
     De är i stort inte unit testade medan de andra klasserna har 100% täckning.<br>
@@ -91,19 +94,30 @@
     Det verkar som att det beror dels på att de har conditions över 6 samt ett CRAP värde över 30.<br><br>
 
     De tre sämsta metoderna är:<br>
-    CardJsonController::jsonDrawManyNum() Conditions: 8 CRAP: 72<br>
-    Kmom03Controller::drawOneCard21Post() Conditions: 6 CRAP: 42<br>
-    CardJsonController::jsonDrawOne() Conditions: 6 CRAP 42<br><br>
+    CardJsonController::jsonDrawManyNum()<br>
+    Conditions: 8<br>
+    CRAP: 72<br><br>
+    Kmom03Controller::drawOneCard21Post()<br>
+    Conditions: 6<br>
+    CRAP: 42<br><br>
+
+    CardJsonController::jsonDrawOne()<br>
+    Conditions: 6<br>
+    CRAP 42<br><br>
 
     </p>
 
     <h3>Scrutinizers badges:</h3>
-    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/quality-score.png?b=main" alt="scrutinizer">
-    
-    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/coverage.png?b=main" alt="coverage">
+    <a href="https://scrutinizer-ci.com/g/fiwr23/mvc-report/?branch=main">
+    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/quality-score.png?b=main" alt="scrutinizer" class="badge">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/fiwr23/mvc-report/?branch=main">
+    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/coverage.png?b=main" alt="coverage" class="badge">
+    </a>
+    <a href="https://scrutinizer-ci.com/g/fiwr23/mvc-report/?branch=main">
+    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/build.png?b=main" alt="build" class="badge"> 
+    </a>
 
-    <img src="https://scrutinizer-ci.com/g/fiwr23/mvc-report/badges/build.png?b=main" alt="build"> 
-    
     <h2>Förbättringar</h2>
     <p>
     Först vill jag åtgärda de 8 issues Scrutinizer pekat ut.<br>
@@ -112,8 +126,69 @@
     Därefter ska jag försöka höja Scrutinizer betyget till A på några av B metoder. 
     Coverage och CRAP borde bättras samtidigt.<br>
     </p>
-    <h2>Analys Före/Efter</h2>
-    <p></p>
+    <h2>Analys Före > Efter</h2>
+    <img src="{{ asset('img/phpmetrics-before.jpg') }}" alt="phpmetrics image" class="half_width">
+    <img src="{{ asset('img/phpmetrics-after.jpg') }}" alt="phpmetrics image" class="half_width">
+    <img src="{{ asset('img/scrutinizer-before.jpg') }}" alt="scrutinizer image" class="half_width">
+    <img src="{{ asset('img/scrutinizer-after.jpg') }}" alt="scrutinizer image" class="half_width">
+    <p>
+
+    CardJsonController::jsonDrawManyNum()<br>
+    Conditions: 8 -> 2<br>
+    CRAP: 72 -> 6<br><br>
+
+    CardJsonController::jsonDrawOne()<br>
+    Conditions: 6 -> 2<br>
+    CRAP: 42 -> 6<br><br>
+
+    GameLogic<br>
+    Complexity: 24 -> 20<br>
+    Maintainability Index: 62.97 -> 69.27<br>
+    Cohesion (LCOM): 4 -> 3<br><br>
+
+    Kmom03Controller<br>
+    Complexity: 18 -> 10<br>
+    Maintainability Index: 61.77 -> 69.72<br>
+    Cohesion (LCOM): 1 -> 1<br><br>
+
+    CardJSONController<br>
+    Complexity: 15 -> 4<br>
+    Maintainability Index: 64.47 -> 73.01<br>
+    Cohesion (LCOM): 4 -> 3<br><br>
+
+    CardGameController<br>
+    Complexity: 11 -> 6<br>
+    Maintainability Index: 64.85 -> 68.61<br>
+    Cohesion (LCOM): 2 -> 1<br><br>
+
+    DiceGameController<br>
+    Complexity: 9 -> 6<br>
+    Maintainability Index: 72.11 -> 77.97<br>
+    Cohesion (LCOM): 2 -> 1<br><br>
+
+    Halstead varningar: 7 -> 4<br><br>
+
+    Scrutinizer score: 9.72 -> 9.85<br>
+    Coverage:  22.2 -> 25<br> 
+    Minor code issues: 8 -> 1 <br>
+    (Tycker inte det kvarvarande issuet borde vara ett issue)<br><br>
+
+    </p>
     <h2>Diskussion</h2>
+    <p>
+    Efter att ha analyserat Php metrics och Scrutinizer datan tog jag mig an uppgiften att 
+    förbättra min kod. Först på agendan var de minor issues som Scrutinizer fann. 
+    Samtliga åtgärdades utom ett issue som jag tycker inte är ett fel. 
+    Sedan var det dags att få bort de röda cirklarna på Php metrics huvudsida. 
+    Ett antal uppdelade klasser senare har både komplexiteten och maintainability index 
+    förbättrats. Några fler unit tester ökade coverage procenten något och lite optimerande av 
+    kod ledde till att tre metoder med betyget B uppgraderades till A.<br>
+    Jag anser att man kan aktivt jobba med kodkvalitet på detta sättet. En fördel är att man blir 
+    uppmärksammad på kodrader som inte skapar fel men är helt onödiga. Nackdelen är att när man 
+    städar och rumsterar om fullt fungerande kod dyker många gånger oanade fel upp.<br>
+    Det bästa sättet att jobba mot ren kod är ju egentligen att skriva den från början. 
+    Har man till exempel knåpat ihop några conditions i en metod bör man få tanken att det är 
+    tid för en ny metod att ta över. Detsamma gäller för metoder i en klass.<br> 
+    </p>
 
 {% endblock %}
