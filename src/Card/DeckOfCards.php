@@ -13,28 +13,28 @@ class DeckOfCards
     * @var array<string|int>
     */
     protected $spadesGraphic = [
-        "🂡", "🂢", "🂣", "🂤", "🂥", "🂦", "🂧", "🂨", "🂩", "🂪", "🂬", "🂭", "🂮"
+        "🂡", "🂢", "🂣", "🂤", "🂥", "🂦", "🂧", "🂨", "🂩", "🂪", "🂫", "🂭", "🂮"
     ];
 
     /**
     * @var array<string|int>
     */
     protected $heartsGraphic = [
-        "🂱", "🂲", "🂳", "🂴", "🂵", "🂶", "🂷", "🂸", "🂹", "🂺", "🂼", "🂽", "🂾"
+        "🂱", "🂲", "🂳", "🂴", "🂵", "🂶", "🂷", "🂸", "🂹", "🂺", "🂻", "🂽", "🂾"
     ];
 
     /**
     * @var array<string|int>
     */
     protected $diamondsGraphic = [
-        "🃁", "🃂", "🃃", "🃄", "🃅", "🃆", "🃇", "🃈", "🃉", "🃊", "🃌", "🃍", "🃎"
+        "🃁", "🃂", "🃃", "🃄", "🃅", "🃆", "🃇", "🃈", "🃉", "🃊", "🃋", "🃍", "🃎"
     ];
 
     /**
     * @var array<string|int>
     */
     protected $clubsGraphic = [
-        "🃑", "🃒", "🃓", "🃔", "🃕", "🃖", "🃗", "🃘", "🃙", "🃚", "🃜", "🃝", "🃞"
+        "🃑", "🃒", "🃓", "🃔", "🃕", "🃖", "🃗", "🃘", "🃙", "🃚", "🃛", "🃝", "🃞"
     ];
 
     /**
@@ -43,7 +43,7 @@ class DeckOfCards
     private $spadesText = [
         "Ace of Spades", "Two of Spades", "Three of Spades", "Four of Spades",
         "Five of Spades", "Six of Spades", "Seven of Spades", "Eight of Spades",
-        "Nine of Spades", "Ten of Spades", "Knight of Spades",
+        "Nine of Spades", "Ten of Spades", "Jack of Spades",
         "Queen of Spades", "King of Spades"
     ];
 
@@ -53,7 +53,7 @@ class DeckOfCards
     private $heartsText = [
         "Ace of Hearts", "Two of Hearts", "Three of Hearts", "Four of Hearts",
         "Five of Hearts", "Six of Hearts", "Seven of Hearts", "Eight of Hearts",
-        "Nine of Hearts", "Ten of Hearts", "Knight of Hearts",
+        "Nine of Hearts", "Ten of Hearts", "Jack of Hearts",
         "Queen of Hearts", "King of Hearts"
     ];
 
@@ -63,7 +63,7 @@ class DeckOfCards
     private $diamondsText = [
         "Ace of Diamonds", "Two of Diamonds", "Three of Diamonds", "Four of Diamonds",
         "Five of Diamonds", "Six of Diamonds", "Seven of Diamonds", "Eight of Diamonds",
-        "Nine of Diamonds", "Ten of Diamonds", "Knight of Diamonds",
+        "Nine of Diamonds", "Ten of Diamonds", "Jack of Diamonds",
         "Queen of Diamonds", "King of Diamonds"
     ];
 
@@ -73,7 +73,7 @@ class DeckOfCards
     private $clubsText = [
         "Ace of Clubs", "Two of Clubs", "Three of Clubs", "Four of Clubs",
         "Five of Clubs", "Six of Clubs", "Seven of Clubs", "Eight of Clubs",
-        "Nine of Clubs", "Ten of Clubs", "Knight of Clubs",
+        "Nine of Clubs", "Ten of Clubs", "Jack of Clubs",
         "Queen of Clubs", "King of Clubs"
     ];
 
