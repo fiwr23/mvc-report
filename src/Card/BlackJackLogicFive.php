@@ -88,9 +88,9 @@ class BlackJackLogicFive
 
         // No active spot anymore
         if (in_array('started', [$playerSpotOne['spot_state'],
-            $playerSpotTwo['spot_state'], $playerSpotThree['spot_state']]) == false &&
+            $playerSpotTwo['spot_state'], $playerSpotThree['spot_state']]) === false &&
             in_array('stay', [$playerSpotOne['spot_state'],
-            $playerSpotTwo['spot_state'], $playerSpotThree['spot_state']]) == false) {
+            $playerSpotTwo['spot_state'], $playerSpotThree['spot_state']]) === false) {
             // next round button will show
             $data['game_state'] = 'finished';
         }
@@ -150,8 +150,8 @@ class BlackJackLogicFive
         $allSpotStates = [
             $playerSpotOne['spot_state'], $playerSpotTwo['spot_state'], $playerSpotThree['spot_state']];
 
-        if (in_array('started', $allSpotStates) == false &&
-        in_array('stay', $allSpotStates) == false) {
+        if (in_array('started', $allSpotStates) === false &&
+        in_array('stay', $allSpotStates) === false) {
             return 'yes';
         }
         return 'no';
