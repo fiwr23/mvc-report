@@ -1,0 +1,148 @@
+{% extends "base_blackjack.html.twig" %}
+
+{% block title %}Black Jack{% endblock %}
+
+{% block main %}
+<div class="div_block">
+{{ include('flash.html.twig') }}
+        {% if game_state != 'ongoing' %}
+            <form id="next_round" class="form21 "method="POST" action="{{ path('next_round_black_jack') }}">
+            <input type="submit" name="do_it" value="Play next round" class="black_jack_btn">
+            </form>
+        {% endif %}
+
+        {% if game_state == 'ongoing' and spot_one_player_hand|length == 1 %}
+            <form id="next_round" class="form21 "method="POST" action="{{ path('second_round_of_cards_black_jack_post') }}">
+            <input type="submit" name="do_it" value="Next round of cards" class="black_jack_btn">
+            </form>
+        {% endif %}
+<h2>♥︎♥︎♥︎ Black Jack ♥︎♥︎♥︎ Player: {{ player_name }} ♥︎♥︎♥︎ Money: <span id="money">{{ money }}</span> ♥︎♥︎♥︎</h2>
+            <div class="black_jack_bank_column">
+                {% if current_player == 'bank' and game_state == 'ongoing' %}
+                <form class="form21" method="POST" action="{{ path('bank_next_move_post') }}">
+                <input type="submit" name="do_it" value="Bank's next move" class="black_jack_btn">
+                </form><br>
+                {% endif %}
+                <h4>Bank</h4>
+                {% if bank_hand|length == 2 and current_player == 'player'%}
+                    <span class="die">{{ bank_hand[0].getAsString() }}🂠</span>
+                {% else %}
+                {% for value in bank_hand %}
+                    <span class="die">{{ value.getAsString() }}</span>
+                {% endfor %}
+                {% endif %}
+                <br>
+                Current hand: {{ bank_hand_score }}<br>
+                {% if bank_hand|length != 2 or current_player == 'bank'%}
+                Card drawn: {{ last_bank_card }}<br>
+                {% else %}
+                Card drawn: HIDDEN<br>
+                {% endif %}
+
+
+            </div>
+    <div class="black_jack_row">
+        <div class="black_jack_column {{ player_spot_one.spot_state }}">
+            <p class="card_display">{% for value in spot_one_player_hand %}
+                <span class="die">{{ value.getAsString() }}</span>
+            {% endfor %}</p>
+            
+            {% if player_spot_one.spot_state == 'won' %}
+                <span class='yellow'>WON: {{ player_spot_one.spot_player_bet }}*2= {{ player_spot_one.spot_player_bet * 2 }}</span><br>
+            {% endif %}
+            {% if player_spot_one.spot_state == 'loss' %}
+                <span class='yellow'>LOST: {{ player_spot_one.spot_player_bet }}</span><br>
+            {% endif %}
+            Current hand: {{ player_spot_one.spot_hand_score }}<br>
+            {% if current_player == 'player' and  game_state == 'ongoing' %}
+            Card drawn: {{ player_spot_one.spot_last_player_card }}<br>
+            Bet: {{ bet1 }}<br>
+            {% if player_spot_one.spot_state != 'won' and player_spot_one.spot_state != 'loss' and player_spot_one.spot_state != 'stay' %}
+            <form class="form21" method="POST" action="{{ path('hit_black_jack_post') }}">
+            
+            {% if spot_one_player_hand|length > 1 %}
+            <input type="hidden" id="active_spot" name="active_spot" value="player_spot_one">
+            <input type="submit" name="do_it" value="Hit" class="black_jack_btn">
+            </form><form class="form21" method="POST" action="{{ path('stay_black_jack_post') }}">
+            <input type="hidden" id="active_spot" name="active_spot" value="player_spot_one">
+            <input type="submit" name="do_it" value="Stay" class="black_jack_btn">
+            </form>
+            {% endif %}
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="black_jack_column 
+            {% if player_spot_two.spot_state is defined %}
+                {{ player_spot_two.spot_state }}
+            {% endif %}
+        ">
+            {% if player_spot_two.spot_hand_score is defined %}
+                <p class="card_display">{% for value in spot_two_player_hand %}
+                <span class="die">{{ value.getAsString() }}</span>
+                
+                {% endfor %}</p>
+            {% if player_spot_two.spot_state is defined and player_spot_two.spot_state == 'won' %}
+                <span class='yellow'>WON: {{ player_spot_two.spot_player_bet }}*2= {{ player_spot_two.spot_player_bet * 2 }}</span><br>
+            {% endif %}
+            {% if player_spot_two.spot_state is defined and player_spot_two.spot_state == 'loss' %}
+                <span class='yellow'>LOST: {{ player_spot_two.spot_player_bet }}</span><br>
+            {% endif %}
+            Current hand: {{ player_spot_two.spot_hand_score }}<br>
+            {% if current_player == 'player' and  game_state == 'ongoing' and num_card_hands > 1 %}
+            Card drawn: {{ player_spot_two.spot_last_player_card }}<br>
+            Bet: {{ bet2 }}<br>
+            {% if (player_spot_one.spot_state == 'won' or player_spot_one.spot_state == 'loss' or player_spot_one.spot_state == 'stay') and 
+            player_spot_two.spot_state != 'won' and player_spot_two.spot_state != 'loss' and player_spot_two.spot_state != 'stay'%}
+            <form class="form21" method="POST" action="{{ path('hit_black_jack_post') }}">
+            {% if spot_two_player_hand|length > 1 %}
+            <input type="hidden" id="active_spot" name="active_spot" value="player_spot_two">
+            <input type="submit" name="do_it" value="Hit" class="black_jack_btn">
+            </form><form class="form21" method="POST" action="{{ path('stay_black_jack_post') }}">
+            <input type="hidden" id="active_spot" name="active_spot" value="player_spot_two">
+            <input type="submit" name="do_it" value="Stay" class="black_jack_btn">
+            </form>
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="black_jack_column 
+            {% if player_spot_three.spot_state is defined %}
+                {{ player_spot_three.spot_state }}
+            {% endif %}
+        ">
+            {% if player_spot_three.spot_last_player_card is defined %}
+                <p class="card_display">{% for value in spot_three_player_hand %}
+                <span class="die">{{ value.getAsString() }}</span> 
+            {% endfor %}</p>
+            {% if player_spot_three.spot_state is defined and player_spot_three.spot_state == 'won' %}
+                <span class='yellow'>WON: {{ player_spot_three.spot_player_bet }}*2= {{ player_spot_three.spot_player_bet * 2 }}</span><br>
+            {% endif %}
+            {% if player_spot_three.spot_state is defined and player_spot_three.spot_state == 'loss' %}
+                <span class='yellow'>LOST: {{ player_spot_three.spot_player_bet }}</span><br>
+            {% endif %}
+            Current hand: {{ player_spot_three.spot_hand_score }}<br>
+            {% if current_player == 'player' and  game_state == 'ongoing' and num_card_hands == 3 %}
+            Card drawn: {{ player_spot_three.spot_last_player_card }}<br>
+            Bet: {{ bet3 }}<br>
+            {% if (player_spot_one.spot_state == 'won' or player_spot_one.spot_state == 'loss' or player_spot_one.spot_state == 'stay') and 
+            (player_spot_two.spot_state == 'won' or player_spot_two.spot_state == 'loss' or player_spot_two.spot_state == 'stay') and 
+            player_spot_three.spot_state != 'won' and player_spot_three.spot_state != 'loss' and player_spot_three.spot_state != 'stay'%}
+            <form class="form21" method="POST" action="{{ path('hit_black_jack_post') }}">
+            
+            {% if spot_three_player_hand|length > 1 %}
+            <input type="hidden" id="active_spot" name="active_spot" value="player_spot_three">
+            <input type="submit" name="do_it" value="Hit" class="black_jack_btn">
+
+            </form><form class="form21" method="POST" action="{{ path('stay_black_jack_post') }}">
+            <input type="hidden" id="active_spot" name="active_spot" value="player_spot_three">
+            <input type="submit" name="do_it" value="Stay" class="black_jack_btn">
+            </form>
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

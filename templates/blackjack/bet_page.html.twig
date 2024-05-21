@@ -1,0 +1,138 @@
+{% extends "base_blackjack.html.twig" %}
+
+{% block title %}Black Jack{% endblock %}
+
+{% block main %}
+<div class="div_block">
+{{ include('flash.html.twig') }}
+<h2>Spots: <span id="spots"> {{ num_card_hands }}</span> <br> Place bet in your spots then press the button.</h2>
+            <div>
+                {% if current_player == 'bank' and game_state == 'ongoing' %}
+                <form class="form21" method="POST" action="{{ path('draw_one_card_black_jack') }}">
+                <input type="submit" name="do_it" value="Bank's next move">
+                </form><br>
+                {% endif %}
+                    <span class="die"> ♥︎♥︎♥︎♥︎♥︎♥︎♥︎♥︎♥︎♥︎♥︎♥︎♥︎♥︎ </span>
+            </div>
+    <div class="black_jack_row">
+        <form class="spot_form" method="POST" action="{{ path('bet_black_jack_post') }}">
+        <div class="black_jack_column">
+            <p class="card_display">
+                <span class="die">♠︎♠︎♠︎</span><br>
+                SPOT ONE BET
+
+            </p>
+            {% if current_player == 'player' and  game_state == 'ongoing' %}
+            <input type="number" id = "bet1" name = "bet1" min="1" value="1"
+            oninput = "bet1Function()">
+            {% endif %}
+        </div>
+
+        <div class="black_jack_column">
+                <p class="card_display">
+                <span class="die">♦︎♦︎♦︎</span><br>
+                SPOT TWO BET
+            </p>
+            {% if current_player == 'player' and  game_state == 'ongoing' and num_card_hands > 1 %}
+            <input type="number" id = "bet2" name = "bet2" min="1" value="1"
+            oninput = "bet2Function()">
+            {% endif %}
+        </div>
+        <div class="black_jack_column">
+                <p class="card_display">
+                <span class="die">♣︎♣︎♣︎</span><br>
+                SPOT THREE BET
+            </p>
+            {% if current_player == 'player' and  game_state == 'ongoing' and num_card_hands == 3 %}
+            <input type="number" id = "bet3" name = "bet3" min="1" value="1"
+            oninput = "bet3Function()">
+            {% endif %}
+        </div>
+        <div class="btn_div">
+        Money : <span id="money">{{ money }}</span>
+        <input class="black_jack_btn btn_center" type="submit" name="do_it" value="All bets are finished">
+        </div>
+        </form>
+    </div>
+</div>
+    <script>
+        let moneyElement = document.getElementById('money');
+        const moneyValue = parseInt(moneyElement.innerText);
+        
+        let bet1Element =  document.getElementById('bet1');
+        let bet1Value = parseInt(bet1Element.value);
+
+
+        let spotsElement = document.getElementById('spots');
+        let spotsValue = parseInt(spotsElement.innerText);
+
+        let bet2Value = 0;
+        let bet3Value = 0;
+        if ( spotsValue > 1) {
+            let bet2Element =  document.getElementById('bet2');
+            bet2Value = parseInt(bet2Element.value);
+        }
+
+        if ( spotsValue == 3) {
+            let bet3Element =  document.getElementById('bet3');
+            bet3Value = parseInt(bet3Element.value);
+        }
+
+        let newMoneyValue = moneyValue - (bet1Value+bet2Value+bet3Value);
+        moneyElement.innerText = newMoneyValue;
+
+        function bet1Function(){
+            console.log("myFunc");
+            let bet1Element =  document.getElementById('bet1');
+            let bet1NewValue = parseInt(bet1Element.value);
+            if (moneyValue - (bet1NewValue+bet2Value+bet3Value)>=0) {
+                let newMoneyValue = moneyValue - (bet1NewValue+bet2Value+bet3Value);
+                bet1Value = bet1NewValue;
+                moneyElement.innerText = newMoneyValue;
+            } else {
+                bet1Element.value = bet1Value;
+            }
+            
+
+            console.log(bet1Value);
+            console.log(moneyValue);
+            // document.getElementById('form_draw_many_json_post').action =`./api/deck/draw/${curr_value}`;
+        }
+
+        function bet2Function(){
+            if ( spotsValue > 1) {
+                console.log("myFunc2");
+                let bet2Element =  document.getElementById('bet2');
+                let bet2NewValue = parseInt(bet2Element.value);
+                if (moneyValue - (bet1Value+bet2NewValue+bet3Value)>=0) {
+                    let newMoneyValue = moneyValue - (bet1Value+bet2NewValue+bet3Value);
+                    bet2Value = bet2NewValue;
+                    moneyElement.innerText = newMoneyValue;
+                } else {
+                    bet2Element.value = bet2Value;
+                }
+                console.log(bet2Value);
+                console.log(moneyValue);
+                // document.getElementById('form_draw_many_json_post').action =`./api/deck/draw/${curr_value}`;
+            }
+        }
+
+        function bet3Function(){
+            console.log("myFunc3");
+            if ( spotsValue == 3) {
+                let bet3Element =  document.getElementById('bet3');
+                let bet3NewValue = parseInt(bet3Element.value);
+                if (moneyValue - (bet1Value+bet2Value+bet3NewValue)>=0) {
+                    let newMoneyValue = moneyValue - (bet1Value+bet2Value+bet3NewValue);
+                    bet3Value = bet3NewValue;
+                    moneyElement.innerText = newMoneyValue;
+                } else {
+                    bet3Element.value = bet3Value;
+                }
+                console.log(bet3Value);
+                console.log(moneyValue);
+                // document.getElementById('form_draw_many_json_post').action =`./api/deck/draw/${curr_value}`;
+            }
+        }
+    </script>
+{% endblock %}
