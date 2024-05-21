@@ -103,14 +103,14 @@ class BlackJackLogicFour
         ];
 
         if ($playerSpotTwo == null) {
-            $playerSpotTwo = [];
+            // $playerSpotTwo = [];
             $playerSpotTwo = [
                 'spot_state' => 'not_active'
             ];
         }
 
         if ($playerSpotThree == null) {
-            $playerSpotThree = [];
+            // $playerSpotThree = [];
             $playerSpotThree = [
                 'spot_state' => 'not_active'
             ];
@@ -130,7 +130,7 @@ class BlackJackLogicFour
          * @var string $spStateTwo
          * @var string $spStateThree
          */
-        if (in_array('started', [$spStateOne,$spStateTwo,$spStateThree]) == false) {
+        if (in_array('started', [$spStateOne,$spStateTwo,$spStateThree]) === false) {
             // next round button will show
             $data['game_state'] = 'finished';
         }
