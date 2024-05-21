@@ -215,5 +215,4 @@ class BlackJackLogicFour
             'player_spot' => $playerSpot
         ];
     }
-
 }
