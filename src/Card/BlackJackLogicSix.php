@@ -114,10 +114,8 @@ class BlackJackLogicSix
                 $bankHandScore = $toStore['bank_hand_score'];
                 $bankHand = $toStore['bank_hand'];
                 $currentDeck = $toStore['current_deck'];
-                /**
-                 * @var array<int|null> $bankHandScore
-                 */
-                $validScores = $this->validScore($bankHandScore);
+
+                //$validScores = $this->validScore($bankHandScore);
                 // no valid score or 21 after new card = return
                 $gameLogic = new BlackJackLogicSeven();
                 /**
