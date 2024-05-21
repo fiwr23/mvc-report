@@ -164,6 +164,50 @@
     </div>
     <div id="kmom10" class="kmom">
     <h2>kmom10</h2>
-    <p>Text</p>
+    <p>
+    Krav 1-3<br>
+    För att stilmässigt helt skilja projektet från resten av sajten valde jag ett svart tema 
+    istället för det glatt gröna. Fonten byttes även den till en mer kraftig variant. 
+    Navbaren transformerades ifrån horisontell till vertikal sådan. Onödiga länkar togs bort och 
+    så blev projektet enbart Black Jack fokuserat.<br>
+
+    Sedan tidigare moment är git repot försett med en README med klickbara länkar till Scrutinizer. 
+    Instruktioner för kloning samt installation och kort beskrivning av repot likaså.<br>
+    Innehållet i docs har uppdaterats till och med projektet. Coverage på relevanta filer är 100%
+     och Metrics är nygenererat.<br><br>
+
+    Uppgift 4-6 gjordes inte.<br><br>
+
+    Mitt val föll på Black Jack vilket blev mer av en utmaning än jag trodde.  
+    Då jag aldrig spelat andra kortspel än poker visste jag inte om alla moment och regler. 
+    Att 21 är målet var så långt min kunskap räckte.<br>
+    Först skulle insats göras på upp till tre positioner. Lite javascript hjälper till att 
+    hålla räkningen på tillgängligt belopp i realtid.<br>
+    Så kommer man till själva spel sidan där två omgångar kort ges till alla inklusive banken. 
+    Men bankens andra kort ska ligga upp och ner tills spelaren är klar! Det blev lite klurande 
+    att dra ut kortet och hålla det dolt tills det var dags. Min lösning var en if sats i twig 
+    templaten som visar kortets baksida tills det är bankens tur.<br>
+    Redan vid andra utdelningen av kort kan spelaren få 21 och vinna. Så kontroll av samtliga 
+    positioner krävs. Vid 21 valde jag att dubbla insatsen och likaså vid bättre resultat än banken. 
+    Det var ett medvetet val att undvika decimaler då det såg rörigt ut på spelplanen.<br>
+    Vinst eller förlust visualiseras med att aktiv spot färgas i rött eller grönt och gul text 
+    informerar om hur mycket man vunnit eller förlorat.<br>
+    Vid hit utförs kontroll av kortens summa och stay leder till nästa spot. Då banken står på tur 
+    kontrolleras först om någon spelar spot fortfarande finns kvar i spelet. 
+    Om inte visas knappen till nästa spelomgång. Annars vänds bankens andra kort upp och kontroller 
+    görs på kortens summa. Om under sjutton dras ett nytt kort. Om mellan 17-20 är banken nöjd och 
+    jämförelser görs med alla aktiva korthänder. Om banken kommer över 21 vinner automatiskt alla 
+    aktiva spots.<br>
+    Vid för få kort tillgängliga i kortleken uppmanas man att deleta sessionen för att spela på 
+    nytt. Samma flash uppmaning syns vid för lite pengar.<br><br>
+
+    Som sagt så tog projektet längre tid att genomföra än jag trodde då det gällde att hålla 
+    tungan rätt i mun och tänka ut alla eventuella utfall vid varje knapp klick. En lämplig 
+    utmaning att avsluta kursen med.<br>
+    
+    Ja, som alla kurser var även den här väldigt givande. Man lärde sig mycket nytt och fick 
+    bra insikt i den värld programmerare rör sig. Det jag uppskattade mest var lektionerna då 
+    läraren kodade live. Betyget på en skala från 1 till 10 blir 8 vilket är riktigt bra. 
+        </p>
     </div>
 {% endblock %}
